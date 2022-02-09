@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        function playAudio() {
+            document.getElementById("myAudio").play();
+
+        }
+        var czo1 = 0
+        document.addEventListener("click", function () {
+            pauseAudio();
+        })
+        function pauseAudio() {
+            document.getElementById("myAudio").pause();
+            if (czo1 == 0) {
+                document.getElementById("open").style.backgroundImage = "url('img/opis_A.jpg')"
+                document.getElementById("open").style.backgroundSize = 800 + "px", 600 + "px"
+                document.getElementById("open2").style.background = "rgb(1,44,0)"
+                document.getElementById("game").style.display = "none"
+                czo1++;
+            }
+            else if (czo1 == 1) {
+                document.getElementById("open").style.backgroundImage = "url('img/opis_B.jpg')"
+                document.getElementById("open").style.backgroundSize = 800 + "px", 600 + "px"
+                document.getElementById("open2").style.background = "rgb(1,44,0)"
+                document.getElementById("game").style.display = "none"
+                czo1++;
+            }
+            else if (czo1 == 2) {
+                document.getElementById("open").remove()
+                document.getElementById("open2").remove()
+                document.getElementById("game").style.display = "block"
+                document.getElementById("do").value = ""
+                czo1++;
+            }
+            else {
+                document.removeEventListener("click", pauseAudio)
+            }
+            document.getElementById("do").focus();
+        }
+        document.addEventListener("DOMContentLoaded", function (event) {
+            var data
+            document.body.addEventListener("click", function () {
+                document.getElementById("do").focus();
+            })
+            function _Location(what, picture, fade, where, iden) {
+                this.what = what
+                this.picture = picture
+                this.fade = fade
+                this.where = where
+                this.iden = iden
+            }
+            function _Subject(id, part, use, name) {
+                this.id = id
+                this.part = part
+                this.use = use
+                this.name = name
+            }
+            fetch("js/data.json")
+                .then(function (response) {
+                    return response.json()
+                })
+                .then(function (myJson) {
+                    data = myJson
+                    game();
+                })
+            function game() {
+                gra.itemy();
+                gra.tab();
+                gra.screen();
+                gra.move();
+            }
+            var gra = {
+                win: 0,
+                ile0: 0,
+                ile1: 0,
+                plansza: [],
+                miejsce: { "wiersz": 4, "kolumna": 7 },
+                things: [],
+                eq: 0,
+                voc: false,
+                ok: 0,
+                sheep: true,
+                dragon: true,
+                l: 180,
+                he: 1,
+                k: true,
+                caps: 0,
+                tab() {
+                    // console.log("tablica");
+
+                    for (var i = 1; i < 7; i++) {
+                        gra.plansza[i] = [
+                            0,
+                            new _Location(data["wiersz" + i][0][0], data["wiersz" + i][0][1], data["wiersz" + i][0][2], data["wiersz" + i][0][3], data["wiersz" + i][0][4], data["wiersz" + i][0][5]),
+                            new _Location(data["wiersz" + i][1][0], data["wiersz" + i][1][1], data["wiersz" + i][1][2], data["wiersz" + i][1][3], data["wiersz" + i][1][4], data["wiersz" + i][0][5]),
+                            new _Location(data["wiersz" + i][2][0], data["wiersz" + i][2][1], data["wiersz" + i][2][2], data["wiersz" + i][2][3], data["wiersz" + i][2][4], data["wiersz" + i][0][5]),
+                            new _Location(data["wiersz" + i][3][0], data["wiersz" + i][3][1], data["wiersz" + i][3][2], data["wiersz" + i][3][3], data["wiersz" + i][3][4], data["wiersz" + i][0][5]),
+                            new _Location(data["wiersz" + i][4][0], data["wiersz" + i][4][1], data["wiersz" + i][4][2], data["wiersz" + i][4][3], data["wiersz" + i][4][4], data["wiersz" + i][0][5]),
+                            new _Location(data["wiersz" + i][5][0], data["wiersz" + i][5][1], data["wiersz" + i][5][2], data["wiersz" + i][5][3], data["wiersz" + i][5][4], data["wiersz" + i][0][5]),
+                            new _Location(data["wiersz" + i][6][0], data["wiersz" + i][6][1], data["wiersz" + i][6][2], data["wiersz" + i][6][3], data["wiersz" + i][6][4], data["wiersz" + i][0][5])
+                        ]
+                    }
+                    // console.log(gra.plansza[1][1])
+                },
+                itemy() {
+                    // console.log(data["items"][0])
+
+                    for (i = 0; i < 38; i++) {
+                        if (i < 10) {
+                            gra.things[i] = [0]
+                        }
+                        else if (i >= 10) {
+                            gra.things[i] = [
+                                new _Subject(data["items"][i - 10][0], data["items"][i - 10][1], data["items"][i - 10][2], data["items"][i - 10][3])
+                            ]
+                        }
+                    }
+                    // console.log(gra.things)
+                },
+                screen() {
+                    gra.l = 180
+                    gra.he = 1
+                    document.getElementById("kursor").style.left = gra.l + "px"
+                    var komenda = document.getElementById("do").value
+                    var aktualny = gra.plansza[gra.miejsce.wiersz][gra.miejsce.kolumna]
+                    var dl = aktualny.where.length
+                    var nr = aktualny.iden[0]
+                    gra.ile0 = 0
+                    gra.ile1 = 0
+                    if (gra.eq == 36) {
+                        document.getElementById("game").remove()
+                        document.getElementById("win").style.display = "block"
+                        document.getElementById("myAudioWin").play();
+                    }
+                    console.log(gra.miejsce.wiersz.toString() + gra.miejsce.kolumna.toString())
+                    for (i = 0; i < aktualny.iden.length; i++) {
+                        if (gra.things[aktualny.iden[i]][0].use == 1)
+                            gra.ile1++
+                        else if (gra.things[aktualny.iden[i]][0].use == 0)
+                            gra.ile0++
+                    }
+                    console.log(gra.ile1)
+                    console.log(gra.ile0)
+                    if (gra.eq == 0) {
+                        document.getElementById("eq").innerText = "You are carrying nothing"
+                    } else {
+                        document.getElementById("eq").innerText = "You have " + data.items[gra.eq - 10][1]
+                    }
+                    var i = 0
+                    console.log(aktualny)
+                    if (nr == 0 || nr == undefined) {
+                        document.getElementById("see").innerText = "You see nothing"
+                    }
+                    if (aktualny.iden[0] > 0) {
+                        for (i = 0; i < aktualny.iden.length; i++) {
+                            if (i == 0)
+                                document.getElementById("see").innerText = "You see " + gra.things[nr][0].part
+                            else
+                                document.getElementById("see").innerText += ", " + gra.things[aktualny.iden[i]][0].part
+                        }
+                    }
+                    document.getElementById("do").value = ""
+                    document.getElementById("direction").innerText = "You can go :"
+                    document.getElementById("place").innerText = aktualny.what
+                    document.getElementById("obr").src = "img/" + aktualny.picture
+                    document.getElementById("obr").style.backgroundColor = aktualny.fade
+                    // console.log(gra.plansza)
+                    // console.log(aktualny.where);
+                    document.getElementById("com").src = "img/kompas/" + aktualny.where + ".png"
+                    if (aktualny.where.includes("W")) {
+                        document.getElementById("direction").innerText += " WEST"
+                        if (dl > 1) {
+                            document.getElementById("direction").innerText += ","
+                            dl--;
+                        }
+                    }
+                    if (aktualny.where.includes("E")) {
+                        document.getElementById("direction").innerText += " EAST"
+                        if (dl > 1) {
+                            document.getElementById("direction").innerText += ","
+                            dl--;
+                        }
+                    }
+                    if (aktualny.where.includes("N") || aktualny.where.includes("n")) {
+                        document.getElementById("direction").innerText += " NORTH"
+                        if (dl > 1) {
+                            document.getElementById("direction").innerText += ","
+                            dl--;
+                        }
+                    }
+                    if (aktualny.where.includes("S")) {
+                        document.getElementById("direction").innerText += " SOUTH"
+                    }
+                },
+                late(string) {
+                    var nr = gra.plansza[gra.miejsce.wiersz][gra.miejsce.kolumna].iden
+                    if (gra.win == 0) {
+                        document.getElementById("line1").style.display = "block"
+                        document.getElementById("gors").style.display = "none"
+                        document.getElementById("line1").innerText = string
+                        setTimeout(function () {
+                            document.getElementById("gors").style.display = "block"
+                            document.getElementById("line1").style.display = "none"
+                            gra.screen();
+                        }, 1000)
+                    } else if (gra.win == 1) {
+                        document.getElementById("line1").style.display = "block"
+                        document.getElementById("gors").style.display = "none"
+                        document.getElementById("line1").innerText = string
+                        setTimeout(function () {
+                            document.getElementById("gors").style.display = "block"
+                            document.getElementById("line1").style.display = "none"
+                        }, 1000)
+                    }
+                },
+                take() {
+                    var aktualny = gra.plansza[gra.miejsce.wiersz][gra.miejsce.kolumna]
+                    var komenda = document.getElementById("do").value
+                    var nr = aktualny.iden[0]
+                    var object = aktualny.iden
+                    var here = true
+                    var can = false
+                    for (var i = 0; i < aktualny.iden.length; i++) {
+                        // console.log(gra.things[i][0])
+                        console.log(gra.things[aktualny.iden[i]][0].name)
+                        if (komenda.toUpperCase() == "T " + gra.things[aktualny.iden[i]][0].name || komenda.toUpperCase() == "TAKE " + gra.things[aktualny.iden[i]][0].name) {
+                            if (gra.things[aktualny.iden[i]][0].use == 0) {
+                                gra.late("You can't carry it")
+                                here = false
+                            }
+                            else {
+                                gra.eq = gra.things[aktualny.iden[i]][0].id
+                                // console.log(gra.eq)
+                                tu = i
+                                gra.late("You are taking " + gra.things[aktualny.iden[i]][0].name)
+                                aktualny.iden.splice(tu, 1)
+                                here = false
+                                gra.ile1--
+                            }
+                        }
+                        else if (here) {
+                            gra.late("There isn't anything like that here")
+                        }
+                    }
+                },
+                drop() {
+                    var aktualny = gra.plansza[gra.miejsce.wiersz][gra.miejsce.kolumna]
+                    var komenda = document.getElementById("do").value
+                    if (gra.eq > 0) {
+                        if (komenda.toUpperCase() == "D " + gra.things[gra.eq][0].name || komenda.toUpperCase() == "DROP " + gra.things[gra.eq][0].name) {
+                            if (gra.things[gra.eq][0].use == 1) {
+                                gra.ile1++
+                            }
+                            if (gra.things[gra.eq][0].use == 0) {
+                                gra.ile0++
+                            }
+                            aktualny.iden.push(gra.eq)
+                            gra.late("You are about to drop " + gra.things[gra.eq][0].name)
+                            gra.eq = 0
+                        } else {
+                            gra.late("You are not carrying it")
+                        }
+                    }
+
+                },
+                use() {
+                    var aktualny = gra.plansza[gra.miejsce.wiersz][gra.miejsce.kolumna]
+                    var komenda = document.getElementById("do").value
+                    var bool = true
+                    if (komenda.toUpperCase() == "U " + gra.things[gra.eq][0].name || komenda.toUpperCase() == "USE " + gra.things[gra.eq][0].name) {
+                        console.log(gra.miejsce.wiersz.toString() + gra.miejsce.kolumna.toString());
+                        for (i = 0; i < data.use.length; i++) {
+                            if (gra.things[gra.eq][0].id == data.use[i][0]) {
+                                if (data.use[i][1] == gra.miejsce.wiersz.toString() + gra.miejsce.kolumna.toString()) {
+                                    if (data.use[i][2].slice(2, 5) == "(L)") {
+                                        if (aktualny.iden[0] == 0 || aktualny.iden[0] == undefined) {
+                                            console.log("siemka");
+                                            if (gra.miejsce.wiersz.toString() + gra.miejsce.kolumna.toString() == 43 && gra.eq == 37) {
+                                                gra.win = 1
+                                                aktualny.iden.pop()
+                                                aktualny.iden.push(data.use[i][2].slice(0, 2))
+                                                gra.late("The dragon noticed your gift...")
+                                                console.log(gra.win);
+                                                setTimeout(function () {
+                                                    gra.late("The dragon ate your sheep and died!");
+                                                    gra.win = 0
+                                                    setTimeout(function () {
+                                                        aktualny.picture = "DS68.bmp"
+                                                        gra.screen()
+                                                    }, 1000)
+                                                }, 1000)
+                                                gra.dragon = false
+                                                gra.eq = 0
+                                                bool = false
+                                            }
+                                            else {
+                                                aktualny.iden.pop()
+                                                aktualny.iden.push(data.use[i][2].slice(0, 2))
+                                                gra.eq = 0
+                                                gra.late(data.use[i][3])
+                                                bool = false
+                                                if (data.use[i][4] == "OK") {
+                                                    gra.ok++
+                                                }
+                                            }
+                                        }
+                                        else {
+                                            aktualny.iden.push(data.use[i][2].slice(0, 2))
+                                            gra.eq = 0
+                                            gra.late(data.use[i][3])
+                                            bool = false
+                                            if (data.use[i][4] == "OK") {
+                                                gra.ok++
+                                            }
+                                        }
+                                        if (gra.sheep) {
+                                            if (gra.ok == 6) {
+                                                for (t = 0; t < aktualny.iden.length + 4; t++) {
+                                                    setTimeout(function () { aktualny.iden.shift() }, 1500)
+                                                }
+                                                if ("OK" + gra.ok == "OK6") {
+                                                    setTimeout(function () {
+                                                        gra.late("Your fake sheep is full of poison and ready to be eaten by the dragon")
+                                                        gra.eq = 37
+                                                    }, 1000)
+                                                }
+                                                gra.sheep = false
+                                            }
+                                        }
+                                    }
+                                    else if (gra.miejsce.wiersz.toString() + gra.miejsce.kolumna.toString() == 11) {
+                                        console.log("siemka");
+
+                                        gra.win = 1
+                                        aktualny.iden.pop()
+                                        gra.late("You are digging...")
+                                        console.log(gra.win);
+                                        setTimeout(function () {
+                                            gra.late("and digging...");
+                                            gra.win = 0
+                                            setTimeout(function () {
+                                                gra.late("That's enough sulphur for you")
+                                            }, 1000)
+                                        }, 1000)
+
+                                        gra.eq = data.use[i][2].slice(0, 2)
+                                        bool = false
+                                    }
+                                    else if (gra.miejsce.wiersz.toString() + gra.miejsce.kolumna.toString() == 11 && gra.eq == 33 && gra.dragon == false) {
+                                        gra.late("You cut a piece of dragon's skin")
+                                        gra.eq = data.use[i][2].slice(0, 2)
+                                    }
+                                    else {
+                                        gra.eq = data.use[i][2].slice(0, 2)
+                                        gra.late(data.use[i][3])
+                                        bool = false
+                                    }
+                                }
+                                else if (bool) {
+                                    gra.late("Nothing happened")
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        gra.late("You aren't carrying anything like that")
+                    }
+                },
+                move() {
+                    gra.he = 1
+                    document.getElementById("do").value = ""
+                    document.getElementById("kursor").style.left = gra.l + "px"
+                    document.getElementById("do").addEventListener("input", function (event) {
+                        var aktualny = gra.plansza[gra.miejsce.wiersz][gra.miejsce.kolumna]
+                        var komenda = document.getElementById("do").value
+                        var nr = aktualny.iden[0]
+                        if (gra.k)
+                            gra.l = 199
+                        this.onkeydown = (e) => {
+                            if (e.which == 20 && gra.caps == 1)
+                                gra.caps = 0;
+                            else if (e.which == 20 && gra.caps == 0) gra.caps = 1
+                            console.log(komenda[0])
+                            // if (gra.caps == 1) {
+                            //     if (komenda[0] != undefined) {
+                            //         var letter = this.value[this.value.length - 1].toUpperCase()
+                            //         console.log(letter)
+                            //         var arr = []
+                            //         arr.pop()
+                            //         arr.push(letter)
+                            //     }
+                            // }
+                            // else if (gra.caps == 0) {
+                            //     if (komenda[0] != undefined) {
+                            //         var letter = this.value[this.value.length - 1].toLowerCase()
+                            //         console.log(letter)
+                            //         var arr = []
+                            //         arr.pop()
+                            //         arr.push(letter)
+                            //     }
+                            // }
+
+                            gra.k = false
+                            if (e.which != 20 && e.key != "Shift") {
+                                if (e.which == 8 && gra.he > 1) {
+                                    console.log(komenda[komenda.length - 1])
+                                    if (komenda[komenda.length - 1] == " ") {
+                                        gra.l = gra.l - 9
+                                        gra.he--
+                                    }
+                                    else {
+                                        gra.l = gra.l - 19
+                                        gra.he--
+                                    }
+                                }
+
+                                else if (gra.he < 20 && gra.he >= 0 && e.which != 8) {
+                                    console.log(e.which);
+                                    if (e.which == 32) {
+                                        gra.he++
+                                        gra.l += 9
+                                    }
+                                    else {
+                                        gra.l += 19
+                                        gra.he++
+                                    }
+                                }
+                            }
+                            if (e.which == 13) {
+                                // console.log("siemka");
+
+                                if (komenda.toUpperCase() == "W" || komenda.toUpperCase() == "WEST") {
+                                    if (document.getElementById("direction").innerText.includes("WEST")) {
+                                        console.log(gra.dragon)
+                                        if (gra.miejsce.wiersz.toString() + gra.miejsce.kolumna.toString() == 42) {
+                                            if (gra.dragon) {
+                                                gra.late("You can't go that way...")
+                                                setTimeout(function () {
+                                                    gra.late("The dragon sleeps in a cave!")
+                                                }, 900)
+
+                                            }
+                                            else {
+                                                gra.miejsce.kolumna = gra.miejsce.kolumna - 1
+                                                gra.late("You are going WEST")
+                                            }
+                                        } else {
+                                            gra.miejsce.kolumna = gra.miejsce.kolumna - 1
+                                            gra.late("You are going WEST")
+                                        }
+
+
+                                    }
+                                    else {
+                                        gra.late("You can't go that way")
+                                    }
+                                }
+                                else if (komenda.toUpperCase() == "E" || komenda.toUpperCase() == "EAST") {
+                                    if (document.getElementById("direction").innerText.includes("EAST")) {
+                                        gra.miejsce.kolumna = gra.miejsce.kolumna + 1
+                                        // console.log(gra.miejsce.kolumna)
+                                        gra.late("You are going EAST")
+                                    }
+                                    else {
+                                        gra.late("You can't go that way")
+                                    }
+                                }
+                                else if (komenda.toUpperCase() == "N" || komenda.toUpperCase() == "NORTH") {
+                                    if (document.getElementById("direction").innerText.includes("NORTH")) {
+                                        gra.miejsce.wiersz = gra.miejsce.wiersz - 1
+                                        // console.log(gra.miejsce.kolumna)
+                                        gra.late("You are going NORTH")
+                                    }
+                                    else {
+                                        gra.late("You can't go that way")
+                                    }
+                                }
+                                else if (komenda.toUpperCase() == "S" || komenda.toUpperCase() == "SOUTH") {
+                                    if (document.getElementById("direction").innerText.includes("SOUTH")) {
+                                        gra.miejsce.wiersz = gra.miejsce.wiersz + 1
+                                        // console.log(gra.miejsce.kolumna)
+                                        gra.late("You are going SOUTH")
+                                    }
+                                    else {
+                                        gra.late("You can't go that way")
+                                    }
+                                }
+                                else if (komenda.toUpperCase().slice(0, 2) == "T " || komenda.toUpperCase().slice(0, 5) == "TAKE ") {
+                                    if (document.getElementById("eq").innerText == "You are carrying nothing") {
+                                        gra.take();
+                                    }
+                                    else {
+                                        gra.late("You are carrying something")
+                                    }
+                                }
+
+                                else if (komenda.toUpperCase().slice(0, 2) == "D " || komenda.toUpperCase().slice(0, 5) == "DROP ") {
+                                    if (gra.eq == 0) {
+                                        gra.late("You are not carrying anything")
+                                    } else {
+                                        if (gra.ile1 > 2) {
+                                            gra.late("You can't store any more here")
+                                        }
+                                        else {
+                                            if (aktualny.iden[0] == 0) {
+                                                aktualny.iden.pop();
+                                            }
+                                            gra.drop();
+                                        }
+                                    }
+                                }
+                                else if (komenda.toUpperCase().slice(0, 2) == "U " || komenda.toUpperCase().slice(0, 4) == "USE ") {
+                                    gra.use();
+                                }
+
+                                else if (komenda.toUpperCase() == "V") {
+                                    document.getElementById("help").style.display = "block"
+                                    gra.voc = true
+                                }
+                                else if (komenda.toUpperCase() == "G") {
+                                    document.getElementById("gos").style.display = "block"
+                                    gra.voc = true
+                                }
+                                else {
+                                    gra.late("Try another word or V for vocabulary")
+                                }
+                            }
+                        }
+
+                        console.log(komenda[komenda.length - 1])
+                        document.getElementById("kursor").style.left = gra.l + "px"
+                        if (gra.voc) {
+                            gra.voc = false;
+                            document.getElementById("help").style.display = "none"
+                            document.getElementById("gos").style.display = "none"
+                            setTimeout(function () { document.getElementById("do").value = "" }, 1)
+                        }
+
+
+
+                    })
+
+                }
+
+
+            }
+        });
+    </script>
+
+    <style>
+        @font-face {
+            font-family: myFirstFont;
+            src: url(fonts/PressStart2P.ttf);
+        }
+
+        * {
+            font-family: myFirstFont;
+            font-size: 19px;
+            word-spacing: -10px;
+            color: rgb(171, 169, 184);
+        }
+
+        p {
+            margin: 20px 20px;
+        }
+
+        #line1 {
+            margin: 30px 20px;
+            display: none;
+        }
+
+        body {
+            background-color: rgb(65, 65, 65);
+        }
+
+
+        label {
+            margin: 30px 20px;
+            display: block;
+        }
+
+        input {
+            background-color: rgb(65, 65, 65);
+            border: none;
+        }
+
+        #kursor {
+            float: left;
+            position: relative;
+            top: -2px;
+            left: 180px;
+            height: 22px;
+            width: 10px;
+            background-color: gray;
+        }
+
+        #game {
+            width: 800px;
+            height: 600px;
+            border: 2px solid white;
+            background-color: rgb(65, 65, 65);
+        }
+
+        #open {
+            width: 800px;
+            height: 600px;
+            background-image: url("img/czołówka.jpg");
+            background-size: 800px 600px;
+            z-index: 10;
+            position: relative;
+            top: -2px;
+            left: -2px;
+            border: 2px solid white;
+        }
+
+        #open2 {
+            width: 800px;
+            height: 600px;
+            background-size: 800px 600px;
+            z-index: 5;
+            position: absolute;
+            top: 9px;
+            left: 9px;
+            border: 2px solid white;
+        }
+
+        #win {
+            display: none;
+            width: 800px;
+            height: 600px;
+            background-image: url("img/win.jpg");
+            background-size: 800px 600px;
+            z-index: 15;
+            position: absolute;
+            top: 9px;
+            left: 9px;
+            border: 2px solid white;
+        }
+
+        #obr {
+            margin: 0 20px;
+            width: 350px;
+            height: 220px;
+            border: 2px solid white;
+        }
+
+        #com {
+            height: 170px;
+            margin: 0 20px 30px 0;
+            width: 350px;
+        }
+
+        #help,
+        #gos {
+            width: 800px;
+            display: none;
+            height: 300px;
+            position: absolute;
+            top: 300px;
+            background-color: rgb(65, 65, 65);
+        }
+
+        #myAudio {
+            display: none;
+        }
+
+        #myAudioWin {
+            display: none;
+        }
+    </style>
+</head>
+
+<body onload="playAudio()">
+    <div id="game">
+        <p id="place"> Tu Jesteś
+        </p>
+        <div>
+            <img id="obr" src="">
+            <img id="com" src="img/WNS.png">
+        </div>
+        <p id="direction">You can go :</p>
+        <p id="see">You see nothing</p>
+        <p id="eq">Pusty Ekwipunek</p>
+        <label id="gors"><span>What now? </span>
+            <div id="kursor"></div><input type="text" id="do" maxlength="20" autofocus>
+        </label>
+        <p id="line1"></p>
+        <div id="help">
+            <p>NORTH or N, SOUTH or S</p>
+            <p>WEST or W, EAST or E</p>
+            <p>TAKE (object) or T (object)</p>
+            <p>DROP (object) or D (object)</p>
+            <p>USE (object) or U (object)</p>
+            <p>GOSSIPS or G, VOCABULARY or V</p>
+            <p>Press any key</p>
+        </div>
+        <div id="gos">
+            <p>The woodcutter lost his home key...</p>
+            <p>The butcher likes fruit... The cooper</p>
+            <p>is greedy... Dratewka plans to make a</p>
+            <p>poisoned bait for the dragon... The</p>
+            <p>tavern owner is buying food from the</p>
+            <p>pickers... Making a rag from a bag...</p>
+            <p>Press any key</p>
+        </div>
+        <audio id="myAudio" controls loop>
+            <source src="Hejnał z Wieży Mariackiej w Krakowie.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    <div id="open2">
+        <div id="open"></div>
+    </div>
+    <div id="win"></div>
+    <audio id="myAudioWin" controls loop>
+        <source src="Queen -  We Are The Champions (Official Video).mp3" type="audio/mpeg">
+    </audio>
+</body>
+
+</html>

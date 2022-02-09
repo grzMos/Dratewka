@@ -1,0 +1,669 @@
+{
+    "wiersz1": [
+        [
+            "You are inside a brimstone mine",
+            "11.gif",
+            "rgb(235,211,64)",
+            "E",
+            [
+                0
+            ]
+        ],
+        [
+            "You are at the entrance to the mine",
+            "12.gif",
+            "rgb(89,93,87)",
+            "WE",
+            [
+                0
+            ]
+        ],
+        [
+            "A hill",
+            "13.gif",
+            "rgb(117,237,243)",
+            "WES",
+            [
+                31
+            ]
+        ],
+        [
+            "Some bushes",
+            "14.gif",
+            "rgb(202,230,51)",
+            "WE",
+            [
+                0
+            ]
+        ],
+        [
+            "An old deserted hut",
+            "15.gif",
+            "rgb(220,204,61)",
+            "WE",
+            [
+                27
+            ]
+        ],
+        [
+            "The edge of a forest",
+            "16.gif",
+            "rgb(167,245,63)",
+            "WE",
+            [
+                0
+            ]
+        ],
+        [
+            "A dark forest",
+            "17.gif",
+            "rgb(140,253,99)",
+            "WS",
+            [
+                14
+            ]
+        ]
+    ],
+    "wiersz2": [
+        [
+            "A man nearby making tar",
+            "21.gif",
+            "rgb(255,190,99)",
+            "ES",
+            [
+                0
+            ]
+        ],
+        [
+            "A timber yard",
+            "22.gif",
+            "rgb(255,190,99)",
+            "WES",
+            [
+                0
+            ]
+        ],
+        [
+            "You are by a roadside shrine",
+            "23.gif",
+            "rgb(167,245,63)",
+            "WENS",
+            [
+                10
+            ]
+        ],
+        [
+            "You are by a small chapel",
+            "24.gif",
+            "rgb(212,229,36)",
+            "WE",
+            [
+                0
+            ]
+        ],
+        [
+            "You are on a road leading to a wood",
+            "25.gif",
+            "rgb(167,245,63)",
+            "WES",
+            [
+                0
+            ]
+        ],
+        [
+            "You are in a forest",
+            "26.gif",
+            "rgb(167,245,63)",
+            "WE",
+            [
+                0
+            ]
+        ],
+        [
+            "You are in a deep forest",
+            "27.gif",
+            "rgb(140,253,99)",
+            "WN",
+            [
+                18
+            ]
+        ]
+    ],
+    "wiersz3": [
+        [
+            "You are by the Vistula River",
+            "31.gif",
+            "rgb(122,232,252)",
+            "EN",
+            [
+                0
+            ]
+        ],
+        [
+            "You are by the Vistula River",
+            "32.gif",
+            "rgb(140,214,255)",
+            "WN",
+            [
+                32
+            ]
+        ],
+        [
+            "You are on a bridge over river",
+            "33.gif",
+            "rgb(108,181,242)",
+            "NS",
+            [
+                0
+            ]
+        ],
+        [
+            "You are by the old tavern",
+            "34.gif",
+            "rgb(255,189,117)",
+            "E",
+            [
+                0
+            ]
+        ],
+        [
+            "You are at the town's end",
+            "35.gif",
+            "rgb(255,190,99)",
+            "WNS",
+            [
+                0
+            ]
+        ],
+        [
+            "You are in a butcher's shop",
+            "36.gif",
+            "rgb(255,188,102)",
+            "S",
+            [
+                0
+            ]
+        ],
+        [
+            "You are in a cooper's house",
+            "37.gif",
+            "rgb(255,188,102)",
+            "S",
+            [
+                0
+            ]
+        ]
+    ],
+    "wiersz4": [
+        [
+            "You are in the Wawel Castle",
+            "41.gif",
+            "rgb(255,176,141)",
+            "E",
+            [
+                0
+            ]
+        ],
+        [
+            "You are inside a dragon's cave",
+            "42.gif",
+            "rgb(198,205,193)",
+            "WE",
+            [
+                0
+            ]
+        ],
+        [
+            "A perfect place to set a trap",
+            "43.gif",
+            "rgb(255,176,141)",
+            "WN",
+            [
+                0
+            ]
+        ],
+        [
+            "You are by the water mill",
+            "44.gif",
+            "rgb(255,190,99)",
+            "E",
+            [
+                21
+            ]
+        ],
+        [
+            "You are at a main crossroad",
+            "45.gif",
+            "rgb(255,190,99)",
+            "WENS",
+            [
+                0
+            ]
+        ],
+        [
+            "You are on a town street",
+            "46.gif",
+            "rgb(255,190,99)",
+            "WEN",
+            [
+                0
+            ]
+        ],
+        [
+            "You are in a frontyard of your house",
+            "47.gif",
+            "rgb(255,190,99)",
+            "WNS",
+            [
+                0
+            ]
+        ]
+    ],
+    "wiersz5": [
+        [
+            null,
+            null,
+            null,
+            null
+        ],
+        [
+            null,
+            null,
+            null,
+            null
+        ],
+        [
+            null,
+            null,
+            null,
+            null
+        ],
+        [
+            "You are by a swift stream",
+            "54.gif",
+            "rgb(108,181,242)",
+            "E",
+            [
+                0
+            ]
+        ],
+        [
+            "You are on a street leading forest",
+            "55.gif",
+            "rgb(255,190,99)",
+            "WNS",
+            [
+                33
+            ]
+        ],
+        [
+            "You are in a woodcutter's backyard",
+            "56.gif",
+            "rgb(255,190,99)",
+            "S",
+            [
+                0
+            ]
+        ],
+        [
+            "You are in a shoemaker's house",
+            "57.gif",
+            "rgb(254,194,97)",
+            "N",
+            [
+                0
+            ]
+        ]
+    ],
+    "wiersz6": [
+        [
+            null,
+            null,
+            null,
+            null
+        ],
+        [
+            null,
+            null,
+            null,
+            null
+        ],
+        [
+            null,
+            null,
+            null,
+            null
+        ],
+        [
+            "You are in a bleak funeral house",
+            "64.gif",
+            "rgb(117,237,243)",
+            "E",
+            [
+                24
+            ]
+        ],
+        [
+            "You are on a path leading to the wood",
+            "26.gif",
+            "rgb(117,237,243)",
+            "WEN",
+            [
+                0
+            ]
+        ],
+        [
+            "You are at the edge of a forest",
+            "66.gif",
+            "rgb(117,237,243)",
+            "WEN",
+            [
+                0
+            ]
+        ],
+        [
+            "You are in a deep forest",
+            "27.gif",
+            "rgb(117,237,243)",
+            "W",
+            [
+                0
+            ]
+        ]
+    ],
+    "items": [
+        [
+            10,
+            "a KEY",
+            1,
+            "KEY"
+        ],
+        [
+            11,
+            "an AXE",
+            1,
+            "AXE"
+        ],
+        [
+            12,
+            "STICKS",
+            1,
+            "STICKS"
+        ],
+        [
+            13,
+            "sheeplegs",
+            0,
+            "sheeplegs"
+        ],
+        [
+            14,
+            "MUSHROOMS",
+            1,
+            "MUSHROOMS"
+        ],
+        [
+            15,
+            "MONEY",
+            1,
+            "MONEY"
+        ],
+        [
+            16,
+            "a BARREL",
+            1,
+            "BARREL"
+        ],
+        [
+            17,
+            "a sheeptrunk",
+            0,
+            "sheeptrunk"
+        ],
+        [
+            18,
+            "BERRIES",
+            1,
+            "BERRIES"
+        ],
+        [
+            19,
+            "WOOL",
+            1,
+            "WOOL"
+        ],
+        [
+            20,
+            "a sheepskin",
+            0,
+            "sheepskin"
+        ],
+        [
+            21,
+            "a BAG",
+            1,
+            "BAG"
+        ],
+        [
+            22,
+            "a RAG",
+            1,
+            "RAG"
+        ],
+        [
+            23,
+            "a sheephead",
+            0,
+            "sheephead"
+        ],
+        [
+            24,
+            "a SPADE",
+            1,
+            "SPADE"
+        ],
+        [
+            25,
+            "SULPHUR",
+            1,
+            "SULPHUR"
+        ],
+        [
+            26,
+            "a solid poison",
+            0,
+            "solid poison"
+        ],
+        [
+            27,
+            "a BUCKET",
+            1,
+            "BUCKET"
+        ],
+        [
+            28,
+            "TAR",
+            1,
+            "TAR"
+        ],
+        [
+            29,
+            "a liquid poison",
+            0,
+            "liquid poison"
+        ],
+        [
+            30,
+            "a dead dragon",
+            0,
+            "dead dragon"
+        ],
+        [
+            31,
+            "a STONE",
+            1,
+            "STONE"
+        ],
+        [
+            32,
+            "a FISH",
+            1,
+            "FISH"
+        ],
+        [
+            33,
+            "a KNIFE",
+            1,
+            "KNIFE"
+        ],
+        [
+            34,
+            "a DRAGONSKIN",
+            1,
+            "DRAGONSKIN"
+        ],
+        [
+            35,
+            "a dragonskin SHOES",
+            1,
+            "SHOES"
+        ],
+        [
+            36,
+            "a PRIZE",
+            1,
+            "PRIZE"
+        ],
+        [
+            37,
+            "a SHEEP",
+            1,
+            "SHEEP"
+        ]
+    ],
+    "use": [
+        [
+            10,
+            56,
+            "11",
+            "You opened a tool shed and took an axe"
+        ],
+        [
+            11,
+            67,
+            "12",
+            "You cut sticks for sheeplegs"
+        ],
+        [
+            12,
+            43,
+            "13(L)",
+            "You prepared legs for your fake sheep",
+            "OK"
+        ],
+        [
+            14,
+            34,
+            "15",
+            "The tavern owner paid you money"
+        ],
+        [
+            15,
+            37,
+            "16",
+            "The cooper sold you a new barrel"
+        ],
+        [
+            16,
+            43,
+            "17(L)",
+            "You made a nice sheeptrunk",
+            "OK"
+        ],
+        [
+            18,
+            36,
+            "19",
+            "The butcher gave you wool"
+        ],
+        [
+            19,
+            43,
+            "20(L)",
+            "You prepared skin for your fake sheep",
+            "OK"
+        ],
+        [
+            21,
+            57,
+            "22",
+            "You used your tools to make a rag"
+        ],
+        [
+            22,
+            43,
+            "23(L)",
+            "You made a fake sheephead",
+            "OK"
+        ],
+        [
+            24,
+            11,
+            "25",
+            "You are digging... (timeout) and digging... (timeout) That's enough sulphur for you"
+        ],
+        [
+            25,
+            43,
+            "26(L)",
+            "You prepared a solid poison",
+            "OK"
+        ],
+        [
+            27,
+            21,
+            "28",
+            "You got a bucket full of tar"
+        ],
+        [
+            28,
+            43,
+            "29(L)",
+            "You prepared a liquid poison",
+            "OK"
+        ],
+        [
+            "6OK",
+            43,
+            37,
+            "Your fake sheep is full of poison and ready to be eaten by the dragon"
+        ],
+        [
+            37,
+            43,
+            "30(L)",
+            "The dragon noticed your gift... (timeout) The dragon ate your sheep and died! - podmiana grafiki na lokacji (martwy smok)!"
+        ],
+        [
+            33,
+            43,
+            "34",
+            "You cut a piece of dragon's skin"
+        ],
+        [
+            34,
+            57,
+            "35",
+            "You used your tools to make shoes"
+        ],
+        [
+            35,
+            41,
+            "36",
+            "The King is impressed by your shoes"
+        ],
+        [
+            36
+        ]
+    ]
+}
